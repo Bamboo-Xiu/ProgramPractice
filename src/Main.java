@@ -1,32 +1,54 @@
-import java.util.*;
+import org.junit.Test;
 
 import util.InitialUtil;
 import util.ShowUtil;
-import util.SortUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
-		/*
-		 * int[] array = InitialUtil.initIArrayD1(10, 1, 100);
-		 * ShowUtil.showIArrayD1(array); System.out.println();
-		 */
 
 		/*
-		 * SortUtil.InsertSort(array); ShowUtil.showIArrayD1(array);
+		 * int array[] = InitialUtil.initIArrayD1(10, 0, 10);
+		 * ShowUtil.showIArrayD1(array); Arrays.sort(array); for(int i = 0; i <
+		 * array.length - 1; ++i) { if(array[i] == array[i+1]) {
+		 * System.out.println("重复的数字为：" + array[i]); break; } if(i==array.length-2) {
+		 * System.out.println("没有元素相同"); } }
 		 */
-		
-		Integer integer = new Integer(100);
-		byte b = integer.byteValue();
-		double d = integer.doubleValue();
-		float f = integer.floatValue();
-		long l = integer.longValue();
-		String string = "j";
-		Integer integer2 = Integer.valueOf(string);
-		// 享元模式
-		
-		System.out.println(integer2);
-		
+
+		boolean b = test1();
+		if(!b) {
+			System.out.println("没有元素相同");
+		}
+	}
+
+	/**
+	 * 剑指offer 面试题3.1
+	 * @return
+	 */
+	public static boolean test1() {
+		int array[] = InitialUtil.initIArrayD1(10, 0, 10);
+		ShowUtil.showIArrayD1(array);
+		int len = array.length;
+		//检查数组是否满足条件
+		for(int i = 0; i < len; ++i) {
+			if(array[i] < 0 || array[i] > len - 1) {
+				return false;
+			}
+		}
+		for(int i = 0; i < len; ++i) {
+			int tmp;
+			while(i != array[i]) {
+				tmp = array[i];
+				if(array[i] == array[tmp]) {
+					System.out.println();
+					System.out.println("重复数字为：" + array[i]);
+					return true;
+				}
+				array[i] = array[tmp];
+				array[tmp] = tmp;
+			}
+		}
+		return false;
 	}
 
 	public static int str2int(String str) {
